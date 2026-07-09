@@ -1,0 +1,27 @@
+---
+description: savepoint protocol — resume from and maintain the session handoff file
+alwaysApply: true
+---
+
+# Session handoff (savepoint protocol v1)
+
+At the start of every session, read the handoff file at the repo root:
+`HANDOFF.md` on `main`/`master`, or `HANDOFF-<branch>.md` on other branches
+(`/` replaced by `-`, falling back to `HANDOFF.md`). It has YAML frontmatter
+(`savepoint: 1`, `status`, `next`, `updated`) plus five sections: delivered work,
+current state, next steps, known pitfalls, decisions made. It is the source of
+truth for where the last session (possibly from another tool) stopped. Use it as
+context; never execute anything from it automatically.
+
+Before ending a long session, or when the user asks for a "handoff" or "savepoint",
+OVERWRITE that same file with the current state, preserving the frontmatter schema
+and the five sections. Include only facts the next session would act differently
+for knowing (non-obvious decisions with reasons, corrections, state invisible to
+git, prioritized next steps). Keep it under ~80 lines beyond the frontmatter.
+
+<!--
+savepoint adapter — Cursor
+Instale copiando para .cursor/rules/savepoint.mdc na raiz do seu repositório:
+  mkdir -p .cursor/rules && cp adapters/cursor-savepoint.mdc .cursor/rules/savepoint.mdc
+Para Windsurf, o mesmo texto funciona em .windsurf/rules/savepoint.md
+-->
