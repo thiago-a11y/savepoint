@@ -1,0 +1,14 @@
+{
+  "name": "savepoint",
+  "owner": {
+    "name": "Thiago Xavier",
+    "url": "https://github.com/thiago-a11y"
+  },
+  "plugins": [
+    {
+      "name": "savepoint",
+      "source": "./",
+      "description": "Handoff automático entre sessões: HANDOFF.md atualizado a cada compactação + skill /handoff + retomada de contexto ao iniciar sessão."
+    }
+  ]
+}

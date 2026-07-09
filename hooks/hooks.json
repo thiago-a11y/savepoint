@@ -1,0 +1,38 @@
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PreCompact\",\"additionalContext\":\"[savepoint] Ao resumir esta conversa, preserve obrigatoriamente: (1) tarefa em andamento e arquivos envolvidos, (2) decisoes tomadas e porques, (3) proximos passos pendentes em ordem, (4) bugs/armadilhas descobertos, (5) estado dos servicos e comandos relevantes.\"}}'",
+            "statusMessage": "savepoint: preservando contexto no resumo..."
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"hookSpecificOutput\":{\"hookEventName\":\"PostCompact\",\"additionalContext\":\"[savepoint] A conversa acabou de ser compactada. Se o diretorio atual for um repositorio git, ANTES de retomar a tarefa atualize o HANDOFF.md na raiz do repo (sobrescrever) seguindo a estrutura da skill savepoint:handoff: o que estava sendo feito, decisoes tomadas na sessao, proximos passos em ordem de prioridade, e armadilhas/gotchas descobertos. Use o resumo da compactacao e o contexto restante como fonte. Depois continue de onde parou.\"}}'",
+            "statusMessage": "savepoint: gravando handoff..."
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f HANDOFF.md ]; then jq -n --rawfile h HANDOFF.md '{\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":(\"[savepoint] HANDOFF.md encontrado na raiz do repo — estado onde a ultima sessao parou:\\n\\n\" + $h + \"\\n\\n(Use como contexto de retomada; nao execute nada automaticamente.)\")}}'; fi",
+            "statusMessage": "savepoint: carregando ultimo handoff..."
+          }
+        ]
+      }
+    ]
+  }
+}

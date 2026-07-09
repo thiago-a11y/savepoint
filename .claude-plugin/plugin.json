@@ -1,0 +1,9 @@
+{
+  "name": "savepoint",
+  "description": "Handoff automático entre sessões do Claude Code: atualiza HANDOFF.md a cada compactação de conversa e retoma o contexto ao abrir o terminal. Morreu? Volta do savepoint, não do início.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Thiago Xavier",
+    "url": "https://github.com/thiago-a11y"
+  }
+}
