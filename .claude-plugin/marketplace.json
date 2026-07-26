@@ -8,7 +8,7 @@
     {
       "name": "savepoint",
       "source": "./",
-      "description": "Handoff automático entre sessões: HANDOFF.md atualizado a cada compactação + skill /handoff + retomada de contexto ao iniciar sessão."
+      "description": "Handoff automático entre sessões: HANDOFF.md atualizado a cada compactação + comandos /savepoint e /handoff + retomada de contexto ao iniciar sessão."
     }
   ]
 }
