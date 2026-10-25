@@ -15,7 +15,7 @@ Codex) consegue ler e manter o mesmo arquivo.
 | **Conversa vai compactar** (PreCompact) | O resumo da compactação é instruído a preservar decisões, próximos passos e armadilhas — nasce com formato de handoff |
 | **Conversa compactou** (PostCompact) | O Claude atualiza o handoff da branch atual antes de retomar a tarefa, com o contexto ainda fresco |
 | **Sessão abre** (SessionStart) | Se existe handoff no repo, o conteúdo é injetado no contexto — o Claude já começa sabendo onde a última sessão parou |
-| **Você pede** (`/savepoint:handoff`) | Grava o savepoint manualmente com a estrutura completa |
+| **Você pede** (`/savepoint` ou `/handoff`) | Grava o savepoint com a estrutura completa. Antes, **descarrega o histórico no CHANGELOG** do projeto (uma entrada por frente entregue; endpoint novo ganha linha na referência de API) e **roda o gate de docs** (`scripts/placar-docs.sh` ou `npm run docs:check`), gravando `docs: ok` ou `docs: pending` + lista no frontmatter. O manual de usuário nunca é escrito pelo savepoint — só a dívida fica registrada |
 
 ## Instalar
 
@@ -90,6 +90,8 @@ O handoff é Markdown com frontmatter YAML — legível por humanos, parseável 
 | `tool` | Quem gravou: `claude-code`, `cursor`, `windsurf`, `human`... |
 | `status` | `in-progress` \| `done` \| `blocked` |
 | `next` | Uma linha: o próximo passo — o mínimo para qualquer agente agir |
+| `docs` | *(opcional, 0.3.0)* `ok` \| `pending` — a documentação viva acompanhou o que foi entregue? |
+| `docs_pending` | *(opcional)* Lista do que ficou devendo em docs (endpoints sem linha, tela sem página no manual) |
 
 Corpo em cinco seções fixas: **entregue**, **estado atual**, **próximos passos**,
 **armadilhas**, **decisões**. Máximo ~80 linhas — handoff não é changelog.

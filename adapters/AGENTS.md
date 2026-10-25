@@ -23,3 +23,12 @@ the same file with the current state, keeping the frontmatter and the five secti
 Only include facts the next session would act differently for knowing: non-obvious
 decisions and their reasons, corrections, state not visible in git, and prioritized
 next steps. Maximum ~80 lines beyond the frontmatter.
+
+Before writing the handoff, move history out of it: if the repo has `CHANGELOG.md`
+or `docs/CHANGELOG.md`, append ONE entry per feature that shipped in this session
+(deploy date, what the user can now do, migrations, commits). Append only — never
+rewrite existing entries. If the repo has a docs check (`scripts/placar-docs.sh` or
+`npm run docs:check`), run it and set `docs: ok` or `docs: pending` in the
+frontmatter, with `docs_pending` listing each debt (new endpoints without a line in
+the API reference, changed screens without a manual page). Never write the user
+manual from the handoff; only record the debt.

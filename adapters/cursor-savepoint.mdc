@@ -19,6 +19,13 @@ and the five sections. Include only facts the next session would act differently
 for knowing (non-obvious decisions with reasons, corrections, state invisible to
 git, prioritized next steps). Keep it under ~80 lines beyond the frontmatter.
 
+Before writing it, move history out: if the repo has `CHANGELOG.md` or
+`docs/CHANGELOG.md`, append ONE entry per feature shipped this session (deploy date,
+what the user can now do, migrations, commits) — append only, never rewrite. If a
+docs check exists (`scripts/placar-docs.sh` or `npm run docs:check`), run it and set
+`docs: ok` or `docs: pending` in the frontmatter, listing each debt in `docs_pending`.
+Never write the user manual from the handoff; only record the debt.
+
 <!--
 savepoint adapter — Cursor
 Instale copiando para .cursor/rules/savepoint.mdc na raiz do seu repositório:
